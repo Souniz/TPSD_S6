@@ -38,9 +38,9 @@ nb_errer=len(errr)
 Taux=nb_errer/len(y_pred)*100
 postif_positif=len([1 for i in range(0,len(y_valid)) if y_pred[i]==0 and y_valid[i]==0])
 postif_negatif=len([1 for i in range(0,len(y_valid)) if y_pred[i]==0 and y_valid[i]==1])
-negatif_negatif=len([1 for i in range(0,len(y_valid)) if y_pred[i]==1 and y_valid[i]==0])
-negatif_positif=len([1 for i in range(0,len(y_valid)) if y_pred[i]==1 and y_valid[i]==1])
-mat_conf=np.array([[postif_positif,postif_negatif],[negatif_negatif,negatif_positif]])
+negatif_negatif=len([1 for i in range(0,len(y_valid)) if y_pred[i]==1 and y_valid[i]==1])
+negatif_positif=len([1 for i in range(0,len(y_valid)) if y_pred[i]==1 and y_valid[i]==0])
+mat_conf=np.array([[postif_positif,postif_negatif],[negatif_positif,negatif_negatif]])
 print(mat_conf)
 
 
