@@ -13,5 +13,5 @@ for i in range(len(data_train)):
     print(f'------- data numero {i+1} -----')
     frontiere=calcul_frontiere(str(data_train[i]),str(data_valid[i]))
     taux,matrice=test(str(data_valid[i]),frontiere)
-    print(f"Le taux d'errer est {taux}")
+    print(f"Le taux d'errer est {taux} %")
     print(f"La matrice de confusion est  {matrice}")
