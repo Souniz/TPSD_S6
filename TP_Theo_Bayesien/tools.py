@@ -8,6 +8,14 @@ def show(fichier):
     plt.hist(df[df['y']==1]['x'],color='red',label='Classe 1',alpha=0.7)
     plt.legend()
     plt.show()
+def show2(axe,i,j,fichier,valid):
+    df=pd.read_csv(fichier)
+    df.columns=['x','y']
+    axe[i,j].hist(df[df['y']==0]['x'],color='blue',alpha=0.7,label='Classe 0')
+    axe[i,j].hist(df[df['y']==1]['x'],color='red',label='Classe 1',alpha=0.7)
+    front=calcul_frontiere(fichier,valid)
+    axe[i,j].set_title(f"Frontiere :{front}  Taux d'errer :{test(valid,front)[0]} %")
+    axe[i,j].legend()
 def calcul_frontiere(fichier_train,fichier_valid):
     """Calcul la frontiere qui donne le plus petit taux d'errer
 
@@ -43,7 +51,7 @@ def test(validation, frontiere):
     y_valid=np.array(df_valid['y'])
     errr=[1 for i in range(0,len(y_valid)) if y_valid[i]!=y_pred[i]]
     nb_errer=len(errr)
-    Taux=nb_errer/len(y_pred)*100
+    Taux=np.round(nb_errer/len(y_pred)*100,3)
     postif_positif=len([1 for i in range(0,len(y_valid)) if y_pred[i]==0 and y_valid[i]==0])
     postif_negatif=len([1 for i in range(0,len(y_valid)) if y_pred[i]==0 and y_valid[i]==1])
     negatif_negatif=len([1 for i in range(0,len(y_valid)) if y_pred[i]==1 and y_valid[i]==1])
