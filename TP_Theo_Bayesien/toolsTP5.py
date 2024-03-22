@@ -7,12 +7,12 @@ X_train=df[['x1','x2']]
 Y_train=np.array(df['y'])
 couleur={1:'blue',0:'orange'}
 def prediction1(x):
-    #f(x)=x-400
+    #f(x)=2/3x-290
     if x[1]> 0.6*x[0]+290:
         return 0
     else:
         return 1
-plt.figure(figsize=(12,8))
+plt.figure(figsize=(10,8))
 for label in np.unique(Y_train):
     plt.scatter(df[Y_train == label]['x1'], df[Y_train == label]['x2'], label=label, marker='+' if label == 0 else 'x')
 plt.legend()
