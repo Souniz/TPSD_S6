@@ -1,17 +1,31 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Mar 28 14:30:15 2024
+
+@author: niangso1
+"""
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt 
+import utils as ut
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt 
 import utils as ut
 
 
-df=pd.read_csv('tp5_data/tp5_data1_train.txt',names=['x1','x2','y'])
+df=pd.read_csv('tp8_data/tp8_data1_train.txt',names=['x1','x2','y'])
 X_train=df[['x1','x2']]
 Y_train=np.array(df['y'])
-couleur={1:'blue',0:'orange'}
 X_classe0=df[df['y']==0]
 X_classe0=X_classe0[['x1','x2']]
 X_classe1=df[df['y']==1]
 X_classe1=X_classe1[['x1','x2']]
+couleur={1:'blue',0:'orange'}
+
 
 
 def calcul_parametre(df):
@@ -34,17 +48,23 @@ detCov1=np.linalg.det(cov1)
 invCov1=np.linalg.inv(cov1)
 p0=len(X_classe0)/len(df)
 p1=len(X_classe1)/len(df)
-def prediction(x):
-     if (x-u0).T @ invCov0  @ (x-u0)+np.log(detCov0)-2*np.log(p0)<(x-u1).T @ invCov1  @ (x-u1) +np.log(detCov1)-2*np.log(p1):
+def predictionMahanlobi(x):
+    if (x-u0).T @ invCov0  @ (x-u0)+np.log(detCov0)-2*np.log(p0)<(x-u1).T @ invCov1  @ (x-u1) +np.log(detCov1)-2*np.log(p1):
             return 0
-     return 1
-ddf=pd.read_csv('tp5_data/tp5_data1_valid.txt',names=['x1','x2','y'])
-X_train=ddf[['x1','x2']]
-Y_train=np.array(ddf['y'])
+    return 1
+
+
+def prediction(x):
+    if(x-u0)@(x-u0).T<(x-u1)@(x-u1).T:
+            return 0
+    return 1
+ddf=pd.read_csv('tp8_data/tp8_data1_valid.txt',names=['x1','x2','y'])
+X_train=df[['x1','x2']]
+Y_train=np.array(df['y'])
 couleur={1:'blue',0:'orange'}
 plt.figure(figsize=(12,8))
 for label in np.unique(Y_train):
-    plt.scatter(ddf[Y_train == label]['x1'], ddf[Y_train == label]['x2'], label=label, marker='+' if label == 0 else 'x')
+    plt.scatter(df[Y_train == label]['x1'], df[Y_train == label]['x2'], label=label, marker='+' if label == 0 else 'x')
 plt.legend()
 ut.plot_decision(X_train['x1'].min(),X_train['x1'].max(),X_train['x2'].min(),X_train['x2'].max(),prediction=prediction)
 plt.axis('equal')
