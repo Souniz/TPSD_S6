@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import utils as ut
 
 
-df=pd.read_csv('tp5_data/tp5_data1_train.txt',names=['x1','x2','y'])
+df=pd.read_csv('tp5_data/tp5_data2_train.txt',names=['x1','x2','y'])
 X_train=df[['x1','x2']]
 Y_train=np.array(df['y'])
 couleur={1:'blue',0:'orange'}
@@ -38,7 +38,7 @@ def prediction(x):
     if (x-u0).T @ invCov0  @ (x-u0)+(x-u0) @ (x-u0).T +np.log10(detCov0)*p0<(x-u1).T @ invCov1  @ (x-u1)+(x-u1) @ (x-u1).T +np.log10(detCov1)*p1:
             return 0
     return 1
-ddf=pd.read_csv('tp5_data/tp5_data1_valid.txt',names=['x1','x2','y'])
+ddf=pd.read_csv('tp5_data/tp5_data2_valid.txt',names=['x1','x2','y'])
 X_train=df[['x1','x2']]
 Y_train=np.array(df['y'])
 couleur={1:'blue',0:'orange'}
