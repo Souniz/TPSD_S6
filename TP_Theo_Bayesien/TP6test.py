@@ -23,6 +23,13 @@ def calcul_parametre(df):
 
 u0,cov0,u1,cov1=calcul_parametre(df)
 def prediction(x):
+    """
+      x:represente la donnees a predire
+      u0: represente la moyenne de la classe 0
+      u1:represente la moyenne de la classe 0
+      La fonction retourne 0 si la distance euclidienne entre x et la moyenne de la 
+      classe 0 est inferieur a celle de la classe 1 et retourne 1 siono
+    """
     if(x-u0)@(x-u0).T<(x-u1)@(x-u1).T:
             return 0
     return 1

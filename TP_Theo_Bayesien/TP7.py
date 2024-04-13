@@ -35,9 +35,23 @@ invCov1=np.linalg.inv(cov1)
 p0=len(X_classe0)/len(df)
 p1=len(X_classe1)/len(df)
 def prediction(x):
-    if (x-u0).T @ invCov0  @ (x-u0)+(x-u0) @ (x-u0).T +np.log10(detCov0)*p0<(x-u1).T @ invCov1  @ (x-u1)+(x-u1) @ (x-u1).T +np.log10(detCov1)*p1:
+    """
+    Cette methode calcule et compare la distance de mahanlobis entre x et la moyenne des classe
+    x:represente la donnees a predire
+    u0: represente la moyenne de la classe 0
+    u1:represente la moyenne de la classe 0
+    detCov0: La matrice de convariance de la classe 0
+    invCov0: L'inverse de la matrice de convariance de la classe 0
+    detCov1: La matrice de convariance de la classe 1
+    invCov1: L'inverse de la matrice de convariance de la classe 1
+    La fonction retourne 0 si la distance euclidienne entre x et la moyenne de la 
+    classe 0 est inferieur a celle de la classe 1 et retourne 1 siono
+    """
+     
+    if (x-u0).T @ invCov0  @ (x-u0)+np.log(detCov0)-2*np.log(p0)<(x-u1).T @ invCov1  @ (x-u1) +np.log(detCov1)-2*np.log(p1):
             return 0
     return 1
+
 ddf=pd.read_csv('tp5_data/tp5_data2_valid.txt',names=['x1','x2','y'])
 X_train=df[['x1','x2']]
 Y_train=np.array(df['y'])
